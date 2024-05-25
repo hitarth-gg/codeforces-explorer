@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/codeforces-explorer/static/css/main.23045a79.css",
-    "main.js": "/codeforces-explorer/static/js/main.59601225.js",
+    "main.js": "/codeforces-explorer/static/js/main.5d894784.js",
     "static/media/anime.gif": "/codeforces-explorer/static/media/anime.3f7d5d3b306269f3d561.gif",
     "static/media/inter-latin-ext-600-normal.woff": "/codeforces-explorer/static/media/inter-latin-ext-600-normal.1b4b5615c2cc1d3b3562.woff",
     "static/media/inter-latin-ext-700-normal.woff": "/codeforces-explorer/static/media/inter-latin-ext-700-normal.4c2578dbd1ff5ea14172.woff",
@@ -141,10 +141,10 @@
     "static/media/pixelify-sans-cyrillic-700-normal.woff2": "/codeforces-explorer/static/media/pixelify-sans-cyrillic-700-normal.f204b189cf81b9905ef7.woff2",
     "index.html": "/codeforces-explorer/index.html",
     "main.23045a79.css.map": "/codeforces-explorer/static/css/main.23045a79.css.map",
-    "main.59601225.js.map": "/codeforces-explorer/static/js/main.59601225.js.map"
+    "main.5d894784.js.map": "/codeforces-explorer/static/js/main.5d894784.js.map"
   },
   "entrypoints": [
     "static/css/main.23045a79.css",
-    "static/js/main.59601225.js"
+    "static/js/main.5d894784.js"
   ]
 }
