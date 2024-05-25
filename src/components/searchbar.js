@@ -44,7 +44,7 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="m-12 flex flex-col justify-center items-center sm:px-6">
+    <div className="my-8 flex flex-col justify-center items-center sm:px-6">
       <TextField.Root
         className="md:w-96 "
         placeholder="Search for a username..."
@@ -68,14 +68,15 @@ export default function SearchBar() {
 
       {authContext.loading && (
         <div className="mt-4 absolute top-[20rem] ">
-          <div className="flex flex-col justify-center items-center gap-3">
+          <div className="flex flex-col justify-center items-center gap-y-3">
             <img className="w-auto h-24" src={Anime} alt="" />
             <l-line-wobble
+              style={{ right: "7%", position: "relative  " }}
               size="80"
               stroke="5"
               bg-opacity="0"
               speed="1.75"
-              color="gray"
+              color="#e5bc94"
             ></l-line-wobble>
           </div>
         </div>

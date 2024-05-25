@@ -59,7 +59,8 @@ export default function AuthProvider({ children }) {
       setCorrectSubmissions(newCorrectSubmissions);
       setSkippedSubmissions(newSkippedSubmissions);
     } catch (error) {
-      if (error.message === "User not found") setErrorMessage("User not found !");
+      if (error.message === "User not found")
+        setErrorMessage("User not found !");
       else setErrorMessage("Failed to fetch data");
       setCorrectSubmissions([]);
       setQuestionsSolved([]);
@@ -78,7 +79,7 @@ export default function AuthProvider({ children }) {
     if (rating < 2400) return "#e9ac50";
     if (rating < 2600) return "#e96e6e";
     if (rating < 3000) return "#ff3333";
-    if(rating >= 3000) return "#b22323";
+    if (rating >= 3000) return "#b22323";
     return "#e97ee9";
   }
 

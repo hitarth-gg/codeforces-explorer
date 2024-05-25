@@ -122,6 +122,7 @@ export default function TableQue() {
               </Table.Cell>
               <Table.RowHeaderCell>
                 <Link
+                  style={{ whiteSpace: "nowrap" }}
                   target="_blank"
                   href={`https://codeforces.com/contest/${it.contestId}/submission/${it.id}`}
                 >
@@ -133,7 +134,7 @@ export default function TableQue() {
               </Table.Cell>
               <Table.Cell>
                 <Link
-                  style={{ color: "#888888" }}
+                  style={{ ...{ color: "#888888" } }}
                   target="_blank"
                   href={
                     it.contestId > 10000
@@ -149,7 +150,10 @@ export default function TableQue() {
                     color="gray"
                     variant="ghost"
                     className="mx-1 border-[0.3px] border-[#363a3f]"
-                    style={{ padding: "1px 4px" }}
+                    style={{
+                      padding: "1px 4px",
+                      whiteSpace: "nowrap",
+                    }}
                   >
                     {tag}
                   </Code>
