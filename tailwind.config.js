@@ -7,6 +7,7 @@ module.exports = {
       sans: ['"inter", ui-sans-serif', "system-ui"],
       geo: ["geologica", "Georgia"],
       mono: ["ui-monospace", "SFMono-Regular"],
+      pixelify: ["pixelify-sans", "geologica", "Georgia"],
     },
     extend: {
       colors: {

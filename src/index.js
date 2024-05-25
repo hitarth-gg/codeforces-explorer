@@ -15,6 +15,11 @@ import "@fontsource/inter/600.css";
 import "@fontsource/inter/700.css";
 import "@fontsource/geologica"; // Defaults to weight 400
 import "@fontsource/geologica/400.css"; // Specify weight
+import '@fontsource/pixelify-sans';
+import '@fontsource/pixelify-sans/400.css';
+import '@fontsource/pixelify-sans/500.css';
+import '@fontsource/pixelify-sans/600.css';
+import '@fontsource/pixelify-sans/700.css';
 
 import AuthProvider from "./Auth/AuthContext";
 // import AuthProvider, { useAuth } from ".src/Auth/AuthContext";
