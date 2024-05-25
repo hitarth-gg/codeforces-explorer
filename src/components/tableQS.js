@@ -134,7 +134,11 @@ export default function TableQue() {
               </Table.Cell>
               <Table.Cell>
                 <Link
-                  style={{ ...{ color: "#888888" } }}
+                  style={{
+                    color: "#888888",
+
+                    whiteSpace: "nowrap",
+                  }}
                   target="_blank"
                   href={
                     it.contestId > 10000
