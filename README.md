@@ -6,10 +6,12 @@ Deployed Website Link :
 
 
 For a codeforces user you can see:
-- All the questions solved by them
+- All the problems solved by them
 - Correct Submissions made by them
 - Skipped Submissions made by them
 - Sort the data by rating of the questions
+- Clicking on the problem will redirect you to the submission that was made by the user
+- Clicking on the Division will redirect you to the problem on codeforces.
 
 Questions Solved:
 ![image](https://github.com/hitarth-gg/codeforces-explorer/assets/132205558/d1fcba3e-3c47-46f8-96c0-d7881ae6993d)
