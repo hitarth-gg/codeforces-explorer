@@ -1,8 +1,8 @@
 # CodeForces Explorer
 
 Deployed Website Link : 
-https://hitarth-gg.github.io/codeforces-explorer/
-https://hitarth.me/codeforces-explorer/
+- https://hitarth-gg.github.io/codeforces-explorer/
+- https://hitarth.me/codeforces-explorer/
 
 
 For a codeforces user you can see:
