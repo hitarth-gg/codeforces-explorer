@@ -1,6 +1,7 @@
 import { GearIcon, MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { Button, DropdownMenu } from "@radix-ui/themes";
 import React from "react";
+import VisitorCounter from "./visit";
 
 export default function Settings({ setTheme }) {
   return (
@@ -30,8 +31,13 @@ export default function Settings({ setTheme }) {
             </DropdownMenu.SubContent>
           </DropdownMenu.Sub>
 
-          {/* <DropdownMenu.Separator /> */}
+          <DropdownMenu.Separator />
+          <div className="flex text-[12px] gap-2 justify-center items-center">
+            Visits: <VisitorCounter />
+          </div>
+
           {/* <DropdownMenu.Item>Share</DropdownMenu.Item> */}
+
           {/* <DropdownMenu.Item>Add to favorites</DropdownMenu.Item> */}
           {/* <DropdownMenu.Separator /> */}
           {/* <DropdownMenu.Item shortcut="⌘ ⌫" color="red">

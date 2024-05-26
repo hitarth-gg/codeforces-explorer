@@ -9,6 +9,7 @@ import { Switch } from "@radix-ui/themes";
 import Settings from "./settings";
 import GithubCard from "./githubCard";
 
+
 export default function Main({ setTheme }) {
   const authContext = useAuth();
   return (
@@ -44,6 +45,7 @@ export default function Main({ setTheme }) {
       >
         {authContext.questionsSolved.length > 0 ? <TabSubmissions /> : ""}
       </div>
+
     </div>
   );
 }
