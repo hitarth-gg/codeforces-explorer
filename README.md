@@ -1,2 +1,1 @@
-### CodeForces Explorer
----
+# CodeForces Explorer
