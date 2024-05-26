@@ -33,7 +33,7 @@ export default function Settings({ setTheme }) {
 
           <DropdownMenu.Separator />
           <div className="flex text-[12px] gap-2 justify-center items-center">
-            Visits: <VisitorCounter />
+            <VisitorCounter />
           </div>
 
           {/* <DropdownMenu.Item>Share</DropdownMenu.Item> */}
