@@ -1,6 +1,6 @@
 # CodeForces Explorer
 
-Deplyoed Website Link : 
+Deployed Website Link : 
 https://hitarth-gg.github.io/codeforces-explorer/
 https://hitarth.me/codeforces-explorer/
 
