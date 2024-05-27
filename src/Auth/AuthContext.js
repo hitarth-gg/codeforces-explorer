@@ -11,8 +11,22 @@ export default function AuthProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [username, setUsername] = useState("");
+  const [solutions, setSolutions] = useState("");
+  const [userInfo, setUserInfo] = useState({});
+
+  function cleanUp() {
+    setQuestionsSolved([]);
+    setCorrectSubmissions([]);
+    setSkippedSubmissions([]);
+    setLoading(false);
+    setErrorMessage("");
+    setUsername("");
+    setSolutions("");
+    setUserInfo({});
+  }
 
   async function getSubmissions({ username }) {
+    cleanUp();
     setLoading(true);
     setErrorMessage("");
 
@@ -24,7 +38,7 @@ export default function AuthProvider({ children }) {
       if (response.status === 400) {
         throw new Error("User not found");
       }
-      if (!response.status === 400) {
+      if (response.status !== 200) {
         throw new Error("Failed to fetch data");
       }
 
@@ -70,11 +84,83 @@ export default function AuthProvider({ children }) {
     }
   }
 
+  async function getSolutions(contestId, index) {
+    cleanUp();
+
+    setLoading(true);
+    setErrorMessage("");
+
+    try {
+      const response = await fetch(
+        // `https://codeforces.com/api/contest.standings?contestId=${contestId}&from=1&count=100`
+        // `https://codeforces.com/api/contest.status?contestId=1974&from=1&count=1000`
+        `https://codeforces.com/api/contest.status?contestId=${contestId}&from=1&count=8000`
+      );
+
+      if (response.status === 400) {
+        throw new Error("Contest not found");
+      }
+      if (response.status !== 200) {
+        throw new Error("Failed to fetch data");
+      }
+
+      const data = await response.json();
+      const plug = data.result;
+
+      console.log(plug);
+      const newSolution = [];
+
+      for (let i = 0; i < plug.length; i++) {
+        if (plug[i].problem.index === index && plug[i].verdict === "OK") {
+          newSolution.push(plug[i]);
+        }
+      }
+      console.log(newSolution);
+      setSolutions(newSolution);
+    } catch (error) {
+      if (error.message === "Contest not found")
+        setErrorMessage("Contest not found !");
+      else setErrorMessage("Failed to fetch data");
+      setSolutions("");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function getUserInfo(usernames) {
+    try {
+      const chunkSize = 500; // You can adjust this based on the API's rate limits
+      const users = [];
+
+      for (let i = 0; i < usernames.length; i += chunkSize) {
+        const chunk = usernames.slice(i, i + chunkSize);
+        const joinedUsers = chunk.join(";");
+        const url = `https://codeforces.com/api/user.info?handles=${joinedUsers}`;
+        console.log(url);
+        
+        const response = await fetch(url);
+
+        if (response.status !== 200) {
+          throw new Error("Failed to fetch data");
+        }
+
+        const data = await response.json();
+        users.push(...data.result);
+      }
+
+      return users;
+    } catch (error) {
+      setErrorMessage("Failed to fetch data");
+      console.error(error);
+      return [];
+    }
+  }
+
   function ratingColor(rating) {
     if (rating < 1200) return "#bbbbbb";
     if (rating < 1400) return "#6ee96e";
     if (rating < 1600) return "#6ecaac";
-    if (rating < 1900) return "#9c9ce9";
+    if (rating < 1900) return "#9eb1ff";
     if (rating < 2100) return "#e97ee9";
     if (rating < 2400) return "#e9ac50";
     if (rating < 2600) return "#e96e6e";
@@ -97,6 +183,9 @@ export default function AuthProvider({ children }) {
         loading,
         setLoading,
         errorMessage,
+        solutions,
+        getSolutions,
+        getUserInfo,
       }}
     >
       {children}

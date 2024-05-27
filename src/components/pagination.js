@@ -62,7 +62,7 @@ export default function Pagination({
           <Grid columns={"5"} >
             {Array.from({ length: pageCount }).map((_, i) => (
               <DropdownMenu.Item
-              
+              key={i}
                 style={
                   i === pageNo
                     ? { ...styles.selected, ...styles.fixed }

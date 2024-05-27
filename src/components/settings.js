@@ -1,7 +1,7 @@
 import { GearIcon, MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { Button, DropdownMenu } from "@radix-ui/themes";
 import React from "react";
-import VisitorCounter from "./visit";
+import VisitorCounter from "./Visit";
 
 export default function Settings({ setTheme }) {
   return (

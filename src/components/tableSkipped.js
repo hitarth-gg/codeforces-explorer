@@ -14,7 +14,7 @@ import {
     ArrowUpIcon,
     BarChartIcon,
   } from "@radix-ui/react-icons";
-  import Pagination from "./pagination";
+  import Pagination from "./Pagination";
   
   export default function TableSkipped() {
     const authContext = useAuth();

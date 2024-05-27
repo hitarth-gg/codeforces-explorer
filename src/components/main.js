@@ -1,17 +1,22 @@
-import { useState } from "react";
-import SearchBar from "./searchbar";
-import TabSubmissions from "./tab";
+import { useEffect, useState } from "react";
+import SearchBar from "./Searchbar";
+import TabSubmissions from "./TabSubmissions";
 import { useAuth } from "../Auth/AuthContext";
 import Duck from "../images/duck.png";
 import PixelFlower from "../images/pixelFlower.png";
-import Pagination from "./pagination";
+import Pagination from "./Pagination";
 import { Switch } from "@radix-ui/themes";
-import Settings from "./settings";
-import GithubCard from "./githubCard";
-
+import Settings from "./Settings";
+import GithubCard from "./GithubCard";
+import Solutions from "./Solutions";
 
 export default function Main({ setTheme }) {
   const authContext = useAuth();
+  
+  // useEffect(() => {
+  //   authContext.getUserInfo(["hitvrth", "hitxrth"]);
+  // }, []);
+
   return (
     <div className="">
       <div className="flex flex-row justify-between px-4 md:px-8 items-center font-sans ">
@@ -22,11 +27,13 @@ export default function Main({ setTheme }) {
       </div>
       {authContext.errorMessage && authContext.errorMessage.length > 0 && (
         <div className="flex flex-col justify-center items-center transition-opacity duration-1000">
-          User Not found <img className="size-10" src={Duck} alt="" />
+          {authContext.errorMessage}{" "}
+          <img className="size-10" src={Duck} alt="" />
         </div>
       )}
       {authContext.errorMessage.length === 0 &&
         authContext.questionsSolved.length === 0 &&
+        authContext.solutions.length === 0 &&
         !authContext.loading && (
           <div
             className="flex text-lg justify-center items-center gap-4"
@@ -44,8 +51,8 @@ export default function Main({ setTheme }) {
         }`}
       >
         {authContext.questionsSolved.length > 0 ? <TabSubmissions /> : ""}
+        {authContext.solutions.length > 0 ? <Solutions /> : ""}
       </div>
-
     </div>
   );
 }

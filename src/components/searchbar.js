@@ -15,24 +15,39 @@ export default function SearchBar() {
   const authContext = useAuth();
   const inputRef = useRef(null);
 
+  function extractIdAndIndex(url) {
+    const regex = /(\d+).*\/([A-Z])$/;
+    const match = url.match(regex);
+    if (match) {
+        return { number: match[1], index: match[2] };
+    }
+    return null;
+}
+
   useEffect(() => {
     const handleKeyPress = (event) => {
       if (event.key === "Enter") {
-        authContext.getSubmissions({ username: searchText });
-        inputRef.current.blur();
+        if (
+          searchText.indexOf("/") !== -1
+        ) {
+          const idx = extractIdAndIndex(searchText);
+          const contestId = idx.number; 
+          const problemIndex = idx.index;
+          authContext.getSolutions(contestId, problemIndex);
+        } else {
+          authContext.getSubmissions({ username: searchText });
+          inputRef.current.blur();
+        }
       }
       if (event.ctrlKey && event.key === "k") {
         event.preventDefault();
-        // select all the text in the input field
         inputRef.current.select();
         inputRef.current.focus();
       }
     };
 
-    // Attach the event listener
     document.addEventListener("keydown", handleKeyPress);
 
-    // Cleanup function to remove the event listener when the component unmounts
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };

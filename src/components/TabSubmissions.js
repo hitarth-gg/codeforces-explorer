@@ -1,7 +1,7 @@
 import { Box, Table, Tabs, Text } from "@radix-ui/themes";
-import TableQue from "./tableQS";
-import TableSkipped from "./tableSkipped";
-import TableCorrect from "./tableCorrect";
+import TableQue from "./TableQS";
+import TableSkipped from "./TableSkipped";
+import TableCorrect from "./TableCorrect";
 
 export default function TabSubmissions() {
   
