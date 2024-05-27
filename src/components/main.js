@@ -9,6 +9,8 @@ import { Switch } from "@radix-ui/themes";
 import Settings from "./Settings";
 import GithubCard from "./GithubCard";
 import Solutions from "./Solutions";
+import VisitorCounter from "./Visit";
+
 
 export default function Main({ setTheme }) {
   const authContext = useAuth();
@@ -52,6 +54,9 @@ export default function Main({ setTheme }) {
       >
         {authContext.questionsSolved.length > 0 ? <TabSubmissions /> : ""}
         {authContext.solutions.length > 0 ? <Solutions /> : ""}
+        <div className="flex opacity-0 text-[12px] gap-2 justify-center items-center">
+            <VisitorCounter />
+          </div>
       </div>
     </div>
   );
