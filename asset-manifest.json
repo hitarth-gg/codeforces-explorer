@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/codeforces-explorer/static/css/main.efc5e5b6.css",
-    "main.js": "/codeforces-explorer/static/js/main.eb010abd.js",
+    "main.js": "/codeforces-explorer/static/js/main.d2fe617a.js",
     "static/media/anime.gif": "/codeforces-explorer/static/media/anime.3f7d5d3b306269f3d561.gif",
     "static/media/inter-latin-ext-600-normal.woff": "/codeforces-explorer/static/media/inter-latin-ext-600-normal.1b4b5615c2cc1d3b3562.woff",
     "static/media/inter-latin-ext-700-normal.woff": "/codeforces-explorer/static/media/inter-latin-ext-700-normal.4c2578dbd1ff5ea14172.woff",
@@ -141,10 +141,10 @@
     "static/media/pixelify-sans-cyrillic-700-normal.woff2": "/codeforces-explorer/static/media/pixelify-sans-cyrillic-700-normal.f204b189cf81b9905ef7.woff2",
     "index.html": "/codeforces-explorer/index.html",
     "main.efc5e5b6.css.map": "/codeforces-explorer/static/css/main.efc5e5b6.css.map",
-    "main.eb010abd.js.map": "/codeforces-explorer/static/js/main.eb010abd.js.map"
+    "main.d2fe617a.js.map": "/codeforces-explorer/static/js/main.d2fe617a.js.map"
   },
   "entrypoints": [
     "static/css/main.efc5e5b6.css",
-    "static/js/main.eb010abd.js"
+    "static/js/main.d2fe617a.js"
   ]
 }
