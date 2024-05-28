@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/codeforces-explorer/static/css/main.efc5e5b6.css",
-    "main.js": "/codeforces-explorer/static/js/main.92ce0e38.js",
+    "main.css": "/codeforces-explorer/static/css/main.da88d6fa.css",
+    "main.js": "/codeforces-explorer/static/js/main.feb9ba84.js",
     "static/media/anime.gif": "/codeforces-explorer/static/media/anime.3f7d5d3b306269f3d561.gif",
     "static/media/inter-latin-ext-600-normal.woff": "/codeforces-explorer/static/media/inter-latin-ext-600-normal.1b4b5615c2cc1d3b3562.woff",
     "static/media/inter-latin-ext-700-normal.woff": "/codeforces-explorer/static/media/inter-latin-ext-700-normal.4c2578dbd1ff5ea14172.woff",
@@ -140,11 +140,11 @@
     "static/media/pixelify-sans-cyrillic-400-normal.woff2": "/codeforces-explorer/static/media/pixelify-sans-cyrillic-400-normal.1c373fa344d126ddd067.woff2",
     "static/media/pixelify-sans-cyrillic-700-normal.woff2": "/codeforces-explorer/static/media/pixelify-sans-cyrillic-700-normal.f204b189cf81b9905ef7.woff2",
     "index.html": "/codeforces-explorer/index.html",
-    "main.efc5e5b6.css.map": "/codeforces-explorer/static/css/main.efc5e5b6.css.map",
-    "main.92ce0e38.js.map": "/codeforces-explorer/static/js/main.92ce0e38.js.map"
+    "main.da88d6fa.css.map": "/codeforces-explorer/static/css/main.da88d6fa.css.map",
+    "main.feb9ba84.js.map": "/codeforces-explorer/static/js/main.feb9ba84.js.map"
   },
   "entrypoints": [
-    "static/css/main.efc5e5b6.css",
-    "static/js/main.92ce0e38.js"
+    "static/css/main.da88d6fa.css",
+    "static/js/main.feb9ba84.js"
   ]
 }
