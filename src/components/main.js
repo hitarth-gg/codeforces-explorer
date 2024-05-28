@@ -16,7 +16,7 @@ export default function Main({ setTheme }) {
 
   return (
     <div className="">
-      <div className="flex flex-row justify-between px-4 md:px- items-center font-sans ">
+      <div className="flex flex-row justify-between px-2 md:px-4 items-center font-sans ">
         {/* <Settings setTheme={setTheme} /> */}
         <GithubCard />
         <SearchBar />
@@ -52,7 +52,7 @@ export default function Main({ setTheme }) {
         )}
 
       <div
-        className={`md:mx-28 sm:mx-4 transition-all ease-in-out duration-150 ${
+        className={`lg:mx-28 sm:mx-4 transition-all ease-in-out duration-150 ${
           authContext.loading ? "blur-sm opacity-25" : ""
         }`}
       >

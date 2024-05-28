@@ -1,12 +1,25 @@
-import { Button, DropdownMenu, Link, Spinner, Table } from "@radix-ui/themes";
+import {
+  Box,
+  Button,
+  Code,
+  DropdownMenu,
+  Flex,
+  Link,
+  Spinner,
+  Table,
+  Text,
+} from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../Auth/AuthContext";
 import timestamp from "unix-timestamp";
 import {
   ArrowDownIcon,
+  ArrowRightIcon,
   ArrowUpIcon,
   BarChartIcon,
+  DividerVerticalIcon,
   LayersIcon,
+  MagnifyingGlassIcon,
 } from "@radix-ui/react-icons";
 import Pagination from "./Pagination";
 
@@ -58,7 +71,7 @@ export default function Solutions() {
   }
 
   function sortDefault() {
-    setOption({ rating: "Rating", lang: "Lang"});
+    setOption({ rating: "Rating", lang: "Lang" });
     setSortedData(data);
   }
 
@@ -71,7 +84,7 @@ export default function Solutions() {
   }
 
   function selectLang(lang) {
-    setOption({ ...option, lang: lang });
+    setOption({ rating: "Rating", lang: lang });
     const sortedTempq = [...data].filter((it) => {
       if (it.programmingLanguage.includes(lang)) return it;
       else return null;
@@ -89,9 +102,66 @@ export default function Solutions() {
     setPage(sortedData.slice(start, end));
   }, [sortedData, pageNo, pageSize]);
 
+  function searchAgain() {
+    if (authContext.getSolMemory)
+      authContext.getSolutions(
+        authContext.getSolMemory.contestId,
+        authContext.getSolMemory.index
+      );
+  }
+
   return (
     <div>
-      <div className="flex justify-end">
+      <div className="flex  justify-between gap-x-2">
+        <Flex align={"center"} className="gap-2 ">
+          <Text size={"1"}>Submissions to Fetch: </Text>
+          <Button
+            size={"1"}
+            variant="soft"
+            color={authContext.submissionCount === 8000 ? "indigo" : "gray"}
+            onClick={() => {
+              authContext.setSubmissionCount(8000);
+            }}
+          >
+            8K
+          </Button>
+          <Button
+            size={"1"}
+            variant="soft"
+            color={authContext.submissionCount === 20000 ? "indigo" : "gray"}
+            onClick={() => {
+              authContext.setSubmissionCount(20000);
+            }}
+          >
+            20K
+          </Button>
+          <Button
+            size={"1"}
+            variant="soft"
+            color={authContext.submissionCount === 50000 ? "indigo" : "gray"}
+            onClick={() => {
+              authContext.setSubmissionCount(50000);
+            }}
+          >
+            50K
+          </Button>
+          {/* <DividerVerticalIcon color="gray" height={20} width={20} /> */}
+            <ArrowRightIcon color="gray" height={16} width={16} />
+          {/* <Text size={"1"}>Search Again: </Text> */}
+          <Button
+            size={"1"}
+            variant="soft"
+            color={"gray"}
+            onClick={() => {
+              searchAgain();
+            }}
+          >
+            <MagnifyingGlassIcon />
+          </Button>
+          <DividerVerticalIcon color="gray" height={20} width={20} />
+            <Code color="gray" variant="outline" size="1">Correct Submissions: {sortedData.length}</Code>
+        </Flex>
+
         <Pagination
           arraySize={sortedData.length}
           pageSize={pageSize}
@@ -185,7 +255,7 @@ export default function Solutions() {
         <Table.Body className="font-sans">
           {page.map((it, index) => (
             <Table.Row key={it.id} style={{ color: "#888888" }}>
-              <Table.Cell>{index + 1}</Table.Cell>
+              <Table.Cell>{pageNo * pageSize + index + 1}</Table.Cell>
               <Table.RowHeaderCell>
                 <Link
                   href={`https://codeforces.com/contest/${it.contestId}/submission/${it.id}`}

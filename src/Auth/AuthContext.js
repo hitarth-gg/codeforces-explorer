@@ -88,7 +88,9 @@ export default function AuthProvider({ children }) {
     }
   }
 
+  const [getSolMemory, setGetSolMemory] = useState({});
   async function getSolutions(contestId, index) {
+    setGetSolMemory({ contestId, index });
     cleanUp();
 
     setLoading(true);
@@ -110,7 +112,7 @@ export default function AuthProvider({ children }) {
       const data = await response.json();
       const plug = data.result;
 
-      console.log(plug);
+      // console.log(plug);
       const newSolution = [];
 
       for (let i = 0; i < plug.length; i++) {
@@ -118,7 +120,7 @@ export default function AuthProvider({ children }) {
           newSolution.push(plug[i]);
         }
       }
-      console.log(newSolution);
+      // console.log(newSolution);
       setSolutions(newSolution);
     } catch (error) {
       if (error.message === "Contest not found")
@@ -139,7 +141,7 @@ export default function AuthProvider({ children }) {
         const chunk = usernames.slice(i, i + chunkSize);
         const joinedUsers = chunk.join(";");
         const url = `https://codeforces.com/api/user.info?handles=${joinedUsers}`;
-        console.log(url);
+        // console.log(url);
 
         const response = await fetch(url);
 
@@ -194,6 +196,7 @@ export default function AuthProvider({ children }) {
         setSubmissionCount,
         usernameChunkSize,
         setUsernameChunkSize,
+        getSolMemory
       }}
     >
       {children}
