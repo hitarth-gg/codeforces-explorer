@@ -5,10 +5,36 @@ import { useAuth } from "../Auth/AuthContext";
 import Anime from "../images/anime.gif";
 
 import { lineWobble } from "ldrs";
+import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // Default values shown
 
 export default function SearchBar() {
+  const path = useLocation(); // This will get the userName param from the URL
+
+  const urlParams = [];
+  if (path.pathname.split("/")[2]) {
+    urlParams.push(path.pathname.split("/")[2]);
+  }
+  if (path.pathname.split("/")[3]) {
+    urlParams.push(path.pathname.split("/")[3]);
+  }
+
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    if (urlParams.length > 0 && urlParams.length < 2) {
+      navigate("/codeforces-explorer/");
+      authContext.getSubmissions({ username: urlParams[0] });
+    } else if (urlParams.length === 2) {
+      navigate("/codeforces-explorer/");
+      authContext.getSolutions(urlParams[0], urlParams[1]);
+    }
+  }, []);
+
+  // console.log(urlParams);
+
   lineWobble.register();
   const [searchText, setSearchText] = useState("");
 
@@ -38,7 +64,10 @@ export default function SearchBar() {
 
   useEffect(() => {
     const handleKeyPress = (event) => {
-      if (event.key === "Enter" && inputRef.current === document.activeElement) {
+      if (
+        event.key === "Enter" &&
+        inputRef.current === document.activeElement
+      ) {
         try {
           handleSearch();
         } catch (e) {
@@ -73,11 +102,15 @@ export default function SearchBar() {
         onInput={handleSearchChange}
         ref={inputRef}
         type="text"
+        value={searchText}
       >
         <TextField.Slot>
           <MagnifyingGlassIcon height="16" width="16" />
         </TextField.Slot>
-        <TextField.Slot className=" transition-all ease-in-out duration-100  hover:bg-slate-700 hover:cursor-pointer" onClick={() => handleSearch()}>
+        <TextField.Slot
+          className=" transition-all ease-in-out duration-100  hover:bg-slate-700 hover:cursor-pointer"
+          onClick={() => handleSearch()}
+        >
           <Code size={"1"} color="gray" variant="outline">
             ctrl
           </Code>

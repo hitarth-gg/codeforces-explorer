@@ -9,13 +9,12 @@ import Solutions from "./Solutions";
 import VisitorCounter from "./Visit";
 import { Link } from "@radix-ui/themes";
 import HowToUse from "./HowToUse";
+import { useLocation } from "react-router-dom";
 
 export default function Main({ setTheme }) {
   const authContext = useAuth();
 
-  // useEffect(() => {
-  //   authContext.getUserInfo(["hitvrth", "hitxrth"]);
-  // }, []);
+
 
   return (
     <div className="">
@@ -41,9 +40,7 @@ export default function Main({ setTheme }) {
           >
             <div
               className="flex text-lg justify-center items-center gap-4"
-              style={{ fontFamily: "Pixelify Sans", 
-                margin: "auto",
-              }}
+              style={{ fontFamily: "Pixelify Sans", margin: "auto" }}
             >
               CodeForces
               <img className="w-auto h-14" src={PixelFlower} alt=""></img>{" "}

@@ -19,7 +19,10 @@ export default function HowToUse() {
         {/* Follow{" "} */}
         <HoverCard.Root>
           <HoverCard.Trigger>
-            <Link href="https://twitter.com/radix_ui" target="_blank">
+            <Link
+              href="https://github.com/hitarth-gg/codeforces-explorer"
+              target="_blank"
+            >
               how to use
             </Link>
           </HoverCard.Trigger>
@@ -79,9 +82,9 @@ export default function HowToUse() {
                   <Text as="div" size="1">
                     For fetching more correct sumbissions of a problem change
                     the value of ‎
-                    <Code color="indigo">Submissions to Fetch</Code> ‎
-                    in Settings {`>`} Values from 8000 to a higher value.
-                    However this will increase the time taken to fetch the data.
+                    <Code color="indigo">Submissions to Fetch</Code> ‎ in
+                    Settings {`>`} Values from 8000 to a higher value. However
+                    this will increase the time taken to fetch the data.
                   </Text>
                 </Blockquote>
               </Box>
