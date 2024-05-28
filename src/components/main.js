@@ -7,9 +7,7 @@ import Settings from "./Settings";
 import GithubCard from "./GithubCard";
 import Solutions from "./Solutions";
 import VisitorCounter from "./Visit";
-import { Link } from "@radix-ui/themes";
 import HowToUse from "./HowToUse";
-import { useLocation } from "react-router-dom";
 
 export default function Main({ setTheme }) {
   const authContext = useAuth();

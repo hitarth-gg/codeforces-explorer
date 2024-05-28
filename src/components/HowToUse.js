@@ -1,9 +1,7 @@
 import {
-  Avatar,
   Blockquote,
   Box,
   Code,
-  Em,
   Flex,
   Heading,
   HoverCard,

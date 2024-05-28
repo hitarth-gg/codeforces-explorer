@@ -5,35 +5,43 @@ import { useAuth } from "../Auth/AuthContext";
 import Anime from "../images/anime.gif";
 
 import { lineWobble } from "ldrs";
-import { useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-// Default values shown
-
 export default function SearchBar() {
-  const path = useLocation(); // This will get the userName param from the URL
+  /* ------------------------------------------------------ */
+  let [searchParams] = useSearchParams();
+  let path = searchParams.get("");
+
+  console.log(path);
 
   const urlParams = [];
-  if (path.pathname.split("/")[2]) {
-    urlParams.push(path.pathname.split("/")[2]);
+  if (path) {
+    if (path.split("/")[0]) {
+      urlParams.push(path.split("/")[0]);
+    }
+    if (path.split("/")[1]) {
+      urlParams.push(path.split("/")[1]);
+    }
   }
-  if (path.pathname.split("/")[3]) {
-    urlParams.push(path.pathname.split("/")[3]);
-  }
+
+  console.log(urlParams);
 
   let navigate = useNavigate();
 
   useEffect(() => {
     if (urlParams.length > 0 && urlParams.length < 2) {
+      setSearchText(urlParams[0]);
       navigate("/codeforces-explorer/");
       authContext.getSubmissions({ username: urlParams[0] });
     } else if (urlParams.length === 2) {
+      setSearchText(urlParams[0] + "/" + urlParams[1]);
       navigate("/codeforces-explorer/");
       authContext.getSolutions(urlParams[0], urlParams[1]);
     }
   }, []);
 
-  // console.log(urlParams);
+  /* ------------------------------------------------------ */
 
   lineWobble.register();
   const [searchText, setSearchText] = useState("");

@@ -1,6 +1,5 @@
 import {
   GearIcon,
-  MagnifyingGlassIcon,
   MoonIcon,
   SunIcon,
 } from "@radix-ui/react-icons";

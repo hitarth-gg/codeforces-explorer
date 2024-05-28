@@ -7,9 +7,6 @@ export const useAuth = () => useContext(AuthContext);
 
 export default function AuthProvider({ children }) {
 
-  const [searchParams, setSearchParams] = useSearchParams();
-
-
   const [questionsSolved, setQuestionsSolved] = useState([]);
   const [correctSubmissions, setCorrectSubmissions] = useState([]);
   const [skippedSubmissions, setSkippedSubmissions] = useState([]);
