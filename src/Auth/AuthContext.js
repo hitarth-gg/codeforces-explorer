@@ -13,6 +13,8 @@ export default function AuthProvider({ children }) {
   const [username, setUsername] = useState("");
   const [solutions, setSolutions] = useState("");
   const [userInfo, setUserInfo] = useState({});
+  const [submissionCount, setSubmissionCount] = useState(8000);
+  const [usernameChunkSize, setUsernameChunkSize] = useState(500);
 
   function cleanUp() {
     setQuestionsSolved([]);
@@ -92,9 +94,8 @@ export default function AuthProvider({ children }) {
 
     try {
       const response = await fetch(
-        // `https://codeforces.com/api/contest.standings?contestId=${contestId}&from=1&count=100`
-        // `https://codeforces.com/api/contest.status?contestId=1974&from=1&count=1000`
-        `https://codeforces.com/api/contest.status?contestId=${contestId}&from=1&count=8000`
+        // `https://codeforces.com/api/contest.status?contestId=${contestId}&from=1&count=8000`
+        `https://codeforces.com/api/contest.status?contestId=${contestId}&from=1&count=${submissionCount}`
       );
 
       if (response.status === 400) {
@@ -129,7 +130,7 @@ export default function AuthProvider({ children }) {
 
   async function getUserInfo(usernames) {
     try {
-      const chunkSize = 500; // You can adjust this based on the API's rate limits
+      const chunkSize = usernameChunkSize; // You can adjust this based on the API's rate limits
       const users = [];
 
       for (let i = 0; i < usernames.length; i += chunkSize) {
@@ -137,7 +138,7 @@ export default function AuthProvider({ children }) {
         const joinedUsers = chunk.join(";");
         const url = `https://codeforces.com/api/user.info?handles=${joinedUsers}`;
         console.log(url);
-        
+
         const response = await fetch(url);
 
         if (response.status !== 200) {
@@ -187,6 +188,10 @@ export default function AuthProvider({ children }) {
         solutions,
         getSolutions,
         getUserInfo,
+        submissionCount,
+        setSubmissionCount,
+        usernameChunkSize,
+        setUsernameChunkSize,
       }}
     >
       {children}

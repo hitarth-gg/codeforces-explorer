@@ -1,19 +1,12 @@
-import {
-  Button,
-  Code,
-  DropdownMenu,
-  Link,
-  Spinner,
-  Table,
-} from "@radix-ui/themes";
+import { Button, DropdownMenu, Link, Spinner, Table } from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../Auth/AuthContext";
 import timestamp from "unix-timestamp";
 import {
   ArrowDownIcon,
-  ArrowTopRightIcon,
   ArrowUpIcon,
   BarChartIcon,
+  LayersIcon,
 } from "@radix-ui/react-icons";
 import Pagination from "./Pagination";
 
@@ -24,7 +17,7 @@ export default function Solutions() {
   const [data, setData] = useState(authContext.solutions || []); // [id, handle, date, lang, time, memory]
   const allUsers = [];
   const [sortedData, setSortedData] = useState(authContext.solutions || []);
-
+  const [option, setOption] = useState({ rating: "Rating", lang: "Lang" });
   // for (let i = 0; i < authContext.solutions.length; i++) {
   //   allUsers.push(authContext.solutions[i].author.members[0].handle);
   // }
@@ -56,14 +49,8 @@ export default function Solutions() {
 
   // console.log(data);
 
-  function sortDesc() {
-    const sortedTempq = [...sortedData].sort(
-      (a, b) => a.author.members[0].rating - b.author.members[0].rating
-    );
-    setSortedData(sortedTempq);
-  }
-
   function sortAsc() {
+    setOption({ ...option, rating: "Asc" });
     const sortedTempq = [...sortedData].sort(
       (a, b) => a.author.members[0].rating - b.author.members[0].rating
     );
@@ -71,10 +58,12 @@ export default function Solutions() {
   }
 
   function sortDefault() {
+    setOption({ rating: "Rating", lang: "Lang"});
     setSortedData(data);
   }
 
   function sortDesc() {
+    setOption({ ...option, rating: "Desc" });
     const sortedTempq = [...sortedData].sort(
       (a, b) => b.author.members[0].rating - a.author.members[0].rating
     );
@@ -82,6 +71,7 @@ export default function Solutions() {
   }
 
   function selectLang(lang) {
+    setOption({ ...option, lang: lang });
     const sortedTempq = [...data].filter((it) => {
       if (it.programmingLanguage.includes(lang)) return it;
       else return null;
@@ -123,7 +113,7 @@ export default function Solutions() {
               <DropdownMenu.Root>
                 <DropdownMenu.Trigger>
                   <Button size={"1"} variant="soft" color="gray">
-                    Rating
+                    {option.rating}
                     <DropdownMenu.TriggerIcon />
                   </Button>
                 </DropdownMenu.Trigger>
@@ -154,7 +144,7 @@ export default function Solutions() {
               <DropdownMenu.Root>
                 <DropdownMenu.Trigger>
                   <Button size={"1"} variant="soft" color="gray">
-                    Lang
+                    {option.lang}
                     <DropdownMenu.TriggerIcon />
                   </Button>
                 </DropdownMenu.Trigger>
@@ -162,7 +152,7 @@ export default function Solutions() {
                   <DropdownMenu.Item
                     onClick={sortDefault}
                     color="gray"
-                    shortcut={<ArrowTopRightIcon />}
+                    shortcut={<LayersIcon />}
                   >
                     All
                   </DropdownMenu.Item>

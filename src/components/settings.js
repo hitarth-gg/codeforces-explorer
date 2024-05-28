@@ -1,9 +1,17 @@
-import { GearIcon, MoonIcon, SunIcon } from "@radix-ui/react-icons";
-import { Button, DropdownMenu } from "@radix-ui/themes";
+import {
+  GearIcon,
+  MagnifyingGlassIcon,
+  MoonIcon,
+  SunIcon,
+} from "@radix-ui/react-icons";
+import { Button, DropdownMenu, TextField } from "@radix-ui/themes";
 import React from "react";
 import VisitorCounter from "./Visit";
+import { useAuth } from "../Auth/AuthContext";
 
 export default function Settings({ setTheme }) {
+  const authContext = useAuth();
+
   return (
     <div className="">
       <DropdownMenu.Root>
@@ -32,6 +40,61 @@ export default function Settings({ setTheme }) {
           </DropdownMenu.Sub>
 
           <DropdownMenu.Separator />
+
+          <DropdownMenu.Sub>
+            <DropdownMenu.SubTrigger>Values</DropdownMenu.SubTrigger>
+            <DropdownMenu.SubContent>
+              <div className="flex flex-col gap-y-1">
+                <div className="flex justify-center items-center gap-2 text-xs">
+                  Submissions to Fetch:
+                  <TextField.Root
+                    type="number"
+                    size={"1"}
+                    placeholder={`${authContext.submissionCount} | (default: 8000)`}
+                    onChange={(e) =>
+                      authContext.setSubmissionCount(e.target.value)
+                    }
+                    onKeyDown={(e) => {
+                      if (
+                        e.key === "Enter" &&
+                        e.currentTarget === document.activeElement
+                      ) {
+                        e.currentTarget.blur();
+                        e.currentTarget.value = "";
+                      }
+                    }}
+                  >
+                    <TextField.Slot></TextField.Slot>
+                  </TextField.Root>
+                </div>
+                <div className="flex justify-center items-center gap-2 text-xs">
+                  Username Chunk Size
+                  <TextField.Root
+                    type="number"
+                    size={"1"}
+                    placeholder={`${authContext.usernameChunkSize} | (default: 500)`}
+                    onChange={(e) =>
+                      authContext.setUsernameChunkSize(e.target.value)
+                    }
+                    onKeyDown={(e) => {
+                      if (
+                        e.key === "Enter" &&
+                        e.currentTarget === document.activeElement
+                      ) {
+                        e.currentTarget.blur();
+                        e.currentTarget.value = "";
+                      }
+                    }}
+                  >
+                    <TextField.Slot></TextField.Slot>
+                  </TextField.Root>
+                </div>
+              </div>
+            </DropdownMenu.SubContent>
+          </DropdownMenu.Sub>
+
+          <DropdownMenu.Separator />
+
           <div className="flex text-[12px] gap-2 justify-center items-center">
             <VisitorCounter />
           </div>

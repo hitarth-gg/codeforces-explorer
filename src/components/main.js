@@ -1,27 +1,25 @@
-import { useEffect, useState } from "react";
-import SearchBar from "./Searchbar";
+import SearchBar from "./SearchBar";
 import TabSubmissions from "./TabSubmissions";
 import { useAuth } from "../Auth/AuthContext";
 import Duck from "../images/duck.png";
 import PixelFlower from "../images/pixelFlower.png";
-import Pagination from "./Pagination";
-import { Switch } from "@radix-ui/themes";
 import Settings from "./Settings";
 import GithubCard from "./GithubCard";
 import Solutions from "./Solutions";
 import VisitorCounter from "./Visit";
-
+import { Link } from "@radix-ui/themes";
+import HowToUse from "./HowToUse";
 
 export default function Main({ setTheme }) {
   const authContext = useAuth();
-  
+
   // useEffect(() => {
   //   authContext.getUserInfo(["hitvrth", "hitxrth"]);
   // }, []);
 
   return (
     <div className="">
-      <div className="flex flex-row justify-between px-4 md:px-8 items-center font-sans ">
+      <div className="flex flex-row justify-between px-4 md:px- items-center font-sans ">
         {/* <Settings setTheme={setTheme} /> */}
         <GithubCard />
         <SearchBar />
@@ -38,12 +36,23 @@ export default function Main({ setTheme }) {
         authContext.solutions.length === 0 &&
         !authContext.loading && (
           <div
-            className="flex text-lg justify-center items-center gap-4"
-            style={{ fontFamily: "Pixelify Sans", height: "80vh" }}
+            className="flex flex-col justify-center items-center"
+            style={{ height: "80vh" }}
           >
-            CodeForces
-            <img className="w-auto h-14" src={PixelFlower} alt=""></img>{" "}
-            Explorer
+            <div
+              className="flex text-lg justify-center items-center gap-4"
+              style={{ fontFamily: "Pixelify Sans", 
+                margin: "auto",
+              }}
+            >
+              CodeForces
+              <img className="w-auto h-14" src={PixelFlower} alt=""></img>{" "}
+              Explorer
+            </div>
+
+            <div className="text-xs">
+              <HowToUse />
+            </div>
           </div>
         )}
 
@@ -55,8 +64,8 @@ export default function Main({ setTheme }) {
         {authContext.questionsSolved.length > 0 ? <TabSubmissions /> : ""}
         {authContext.solutions.length > 0 ? <Solutions /> : ""}
         <div className="flex opacity-0 text-[12px] gap-2 justify-center items-center">
-            <VisitorCounter />
-          </div>
+          <VisitorCounter />
+        </div>
       </div>
     </div>
   );

@@ -1,9 +1,7 @@
 import {
-    Badge,
     Button,
     Code,
     DropdownMenu,
-    Flex,
     Link,
     Table,
   } from "@radix-ui/themes";

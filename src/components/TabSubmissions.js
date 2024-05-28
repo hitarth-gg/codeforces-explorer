@@ -1,4 +1,4 @@
-import { Box, Table, Tabs, Text } from "@radix-ui/themes";
+import { Box,Tabs, Text } from "@radix-ui/themes";
 import TableQue from "./TableQS";
 import TableSkipped from "./TableSkipped";
 import TableCorrect from "./TableCorrect";

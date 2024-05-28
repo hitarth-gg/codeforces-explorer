@@ -1,11 +1,16 @@
-import { Switch, Theme } from "@radix-ui/themes";
+import { Theme } from "@radix-ui/themes";
 import "./App.css";
 import Main from "./components/Main";
 import AuthProvider from "./Auth/AuthContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
-  const [theme, setTheme] = useState("dark");
+  // const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   return (
     <AuthProvider>

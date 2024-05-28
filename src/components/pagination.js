@@ -1,9 +1,8 @@
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
-  MagnifyingGlassIcon,
 } from "@radix-ui/react-icons";
-import { Button, DropdownMenu, Flex, Grid, IconButton } from "@radix-ui/themes";
+import { Button, DropdownMenu, Grid, IconButton } from "@radix-ui/themes";
 import React from "react";
 
 // #3e63dd

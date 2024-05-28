@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../Auth/AuthContext";
 import Anime from "../images/anime.gif";
 
-import { grid, lineWobble } from "ldrs";
+import { lineWobble } from "ldrs";
 
 // Default values shown
 
@@ -24,19 +24,23 @@ export default function SearchBar() {
     return null;
   }
 
+  function handleSearch() {
+    if (searchText.indexOf("/") !== -1) {
+      const idx = extractIdAndIndex(searchText);
+      const contestId = idx.number;
+      const problemIndex = idx.index;
+      authContext.getSolutions(contestId, problemIndex);
+    } else {
+      authContext.getSubmissions({ username: searchText });
+      inputRef.current.blur();
+    }
+  }
+
   useEffect(() => {
     const handleKeyPress = (event) => {
-      if (event.key === "Enter") {
+      if (event.key === "Enter" && inputRef.current === document.activeElement) {
         try {
-          if (searchText.indexOf("/") !== -1) {
-            const idx = extractIdAndIndex(searchText);
-            const contestId = idx.number;
-            const problemIndex = idx.index;
-            authContext.getSolutions(contestId, problemIndex);
-          } else {
-            authContext.getSubmissions({ username: searchText });
-            inputRef.current.blur();
-          }
+          handleSearch();
         } catch (e) {
           authContext.setErrorMessage("Contest/Problem not found");
         }
@@ -63,7 +67,8 @@ export default function SearchBar() {
   return (
     <div className="my-8 flex flex-col justify-center items-center sm:px-6">
       <TextField.Root
-        className="md:w-96 "
+        // className="md:w-96 "
+        className="w-[25rem] "
         placeholder="Search for a username..."
         onInput={handleSearchChange}
         ref={inputRef}
@@ -72,8 +77,7 @@ export default function SearchBar() {
         <TextField.Slot>
           <MagnifyingGlassIcon height="16" width="16" />
         </TextField.Slot>
-        <TextField.Slot>
-          {/* <MagnifyingGlassIcon height="16" width="16" /> */}
+        <TextField.Slot className=" transition-all ease-in-out duration-100  hover:bg-slate-700 hover:cursor-pointer" onClick={() => handleSearch()}>
           <Code size={"1"} color="gray" variant="outline">
             ctrl
           </Code>

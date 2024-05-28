@@ -1,5 +1,5 @@
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
-import { Avatar, Box, Card, Flex, Text } from "@radix-ui/themes";
+import { Card } from "@radix-ui/themes";
 import React from "react";
 
 export default function GithubCard() {
