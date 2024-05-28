@@ -69,7 +69,7 @@ export default function SearchBar() {
       <TextField.Root
         // className="md:w-96 "
         className="w-[25rem] "
-        placeholder="Search for a username..."
+        placeholder="Search for a username / problem..."
         onInput={handleSearchChange}
         ref={inputRef}
         type="text"

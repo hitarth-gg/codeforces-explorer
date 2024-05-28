@@ -23,7 +23,7 @@ export default function HowToUse() {
               how to use
             </Link>
           </HoverCard.Trigger>
-          <HoverCard.Content maxWidth="800px">
+          <HoverCard.Content maxWidth="700px">
             <Flex gap="4" style={{ gap: "10px" }}>
               <Box>
                 <Text
@@ -64,6 +64,24 @@ export default function HowToUse() {
                         https://codeforces.com/contest/1977/problem/B{" "}
                       </Code>
                     </div>
+                  </Text>
+                </Blockquote>
+                <Text
+                  size="2"
+                  as="h4"
+                  style={{
+                    fontWeight: "bold",
+                  }}
+                >
+                  Fetching more Solutions
+                </Text>
+                <Blockquote color="gray" size={"1"}>
+                  <Text as="div" size="1">
+                    For fetching more correct sumbissions of a problem change
+                    the value of ‎
+                    <Code color="indigo">Submissions to Fetch</Code> ‎
+                    in Settings {`>`} Values from 8000 to a higher value.
+                    However this will increase the time taken to fetch the data.
                   </Text>
                 </Blockquote>
               </Box>
