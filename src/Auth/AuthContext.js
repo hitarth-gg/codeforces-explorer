@@ -183,6 +183,7 @@ export default function AuthProvider({ children }) {
         loading,
         setLoading,
         errorMessage,
+        setErrorMessage,
         solutions,
         getSolutions,
         getUserInfo,

@@ -1,16 +1,35 @@
-import { Code, Link, Table } from "@radix-ui/themes";
+import {
+  Button,
+  Code,
+  DropdownMenu,
+  Link,
+  Spinner,
+  Table,
+} from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../Auth/AuthContext";
 import timestamp from "unix-timestamp";
+import {
+  ArrowDownIcon,
+  ArrowTopRightIcon,
+  ArrowUpIcon,
+  BarChartIcon,
+} from "@radix-ui/react-icons";
+import Pagination from "./Pagination";
 
 export default function Solutions() {
   const authContext = useAuth();
 
   const [userRating, setUserRating] = useState([]);
-  //  const [allUsers, setAllUsers] = useState([]);
+  const [data, setData] = useState(authContext.solutions || []); // [id, handle, date, lang, time, memory]
   const allUsers = [];
+  const [sortedData, setSortedData] = useState(authContext.solutions || []);
 
-  for (let i = 0; i < authContext.solutions.length; i++) {
+  // for (let i = 0; i < authContext.solutions.length; i++) {
+  //   allUsers.push(authContext.solutions[i].author.members[0].handle);
+  // }
+
+  for (let i = 0; i < data.length; i++) {
     allUsers.push(authContext.solutions[i].author.members[0].handle);
   }
 
@@ -21,28 +40,162 @@ export default function Solutions() {
     };
 
     fetchUserRatings();
-  }, [authContext]);
+  }, [authContext.solutions]);
+
+  useEffect(() => {
+    let newData = [...data];
+    if (userRating.length > 0) {
+      userRating.map(
+        (it, index) =>
+          (newData[index].author.members[0].rating = it.rating || -1)
+      );
+      setData(newData);
+      setSortedData(newData);
+    }
+  }, [userRating.length]);
+
+  // console.log(data);
+
+  function sortDesc() {
+    const sortedTempq = [...sortedData].sort(
+      (a, b) => a.author.members[0].rating - b.author.members[0].rating
+    );
+    setSortedData(sortedTempq);
+  }
+
+  function sortAsc() {
+    const sortedTempq = [...sortedData].sort(
+      (a, b) => a.author.members[0].rating - b.author.members[0].rating
+    );
+    setSortedData(sortedTempq);
+  }
+
+  function sortDefault() {
+    setSortedData(data);
+  }
+
+  function sortDesc() {
+    const sortedTempq = [...sortedData].sort(
+      (a, b) => b.author.members[0].rating - a.author.members[0].rating
+    );
+    setSortedData(sortedTempq);
+  }
+
+  function selectLang(lang) {
+    const sortedTempq = [...data].filter((it) => {
+      if (it.programmingLanguage.includes(lang)) return it;
+      else return null;
+    });
+    setSortedData(sortedTempq);
+  }
+
+  const [pageSize, setPageSize] = useState(100);
+  const [pageNo, setPageNo] = useState(0);
+  const [page, setPage] = useState([]);
+
+  useEffect(() => {
+    const start = pageNo * pageSize;
+    const end = start + pageSize;
+    setPage(sortedData.slice(start, end));
+  }, [sortedData, pageNo, pageSize]);
 
   return (
     <div>
+      <div className="flex justify-end">
+        <Pagination
+          arraySize={sortedData.length}
+          pageSize={pageSize}
+          setPageSize={setPageSize}
+          pageNo={pageNo}
+          setPageNo={setPageNo}
+          page={page}
+          setPage={setPage}
+          position="relative"
+        />
+      </div>
       <Table.Root>
         <Table.Header>
           <Table.Row>
             <Table.ColumnHeaderCell>No.</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>#</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Who</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Rating</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell>
+              <DropdownMenu.Root>
+                <DropdownMenu.Trigger>
+                  <Button size={"1"} variant="soft" color="gray">
+                    Rating
+                    <DropdownMenu.TriggerIcon />
+                  </Button>
+                </DropdownMenu.Trigger>
+                <DropdownMenu.Content size={"1"}>
+                  <DropdownMenu.Item
+                    shortcut={<BarChartIcon />}
+                    onClick={sortDefault}
+                  >
+                    Default
+                  </DropdownMenu.Item>
+                  <DropdownMenu.Item
+                    shortcut={<ArrowDownIcon />}
+                    onClick={sortAsc}
+                  >
+                    Ascending
+                  </DropdownMenu.Item>
+                  <DropdownMenu.Item
+                    shortcut={<ArrowUpIcon />}
+                    onClick={sortDesc}
+                  >
+                    Descending
+                  </DropdownMenu.Item>
+                </DropdownMenu.Content>
+              </DropdownMenu.Root>
+            </Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Date</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Lang</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell>
+              <DropdownMenu.Root>
+                <DropdownMenu.Trigger>
+                  <Button size={"1"} variant="soft" color="gray">
+                    Lang
+                    <DropdownMenu.TriggerIcon />
+                  </Button>
+                </DropdownMenu.Trigger>
+                <DropdownMenu.Content size={"1"}>
+                  <DropdownMenu.Item
+                    onClick={sortDefault}
+                    color="gray"
+                    shortcut={<ArrowTopRightIcon />}
+                  >
+                    All
+                  </DropdownMenu.Item>
+                  <DropdownMenu.Item onClick={() => selectLang("C++")}>
+                    C++
+                  </DropdownMenu.Item>
+                  <DropdownMenu.Item onClick={() => selectLang("Java ")}>
+                    Java
+                  </DropdownMenu.Item>
+                  <DropdownMenu.Item onClick={() => selectLang("Pyt")}>
+                    Python
+                  </DropdownMenu.Item>
+                  <DropdownMenu.Item onClick={() => selectLang("JavaScript")}>
+                    JavaScript
+                  </DropdownMenu.Item>
+                  <DropdownMenu.Item onClick={() => selectLang("Go")}>
+                    Go
+                  </DropdownMenu.Item>
+                  <DropdownMenu.Item onClick={() => selectLang("PyPy")}>
+                    PyPy
+                  </DropdownMenu.Item>
+                </DropdownMenu.Content>
+              </DropdownMenu.Root>
+            </Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Time</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Memory</Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
 
         <Table.Body className="font-sans">
-          {authContext.solutions.map((it, index) => (
+          {page.map((it, index) => (
             <Table.Row key={it.id} style={{ color: "#888888" }}>
-              <Table.Cell>{index+1}</Table.Cell>
+              <Table.Cell>{index + 1}</Table.Cell>
               <Table.RowHeaderCell>
                 <Link
                   href={`https://codeforces.com/contest/${it.contestId}/submission/${it.id}`}
@@ -51,28 +204,38 @@ export default function Solutions() {
                   {it.id}
                 </Link>
               </Table.RowHeaderCell>
-              <Table.RowHeaderCell
-                style={{
-                  color: authContext.ratingColor(
-                    userRating[index]?.rating || "0"
-                  ),
-                }}
-              >
-                {/* {`${it.author.members[0].handle} • `} */}
-                {`${it.author.members[0].handle}`}
+              <Table.RowHeaderCell>
+                <Link
+                  style={{
+                    color: authContext.ratingColor(
+                      it.author.members[0].rating || 0
+                    ),
+                  }}
+                  href={`https://codeforces.com/profile/${it.author.members[0].handle}`}
+                  target="_blank"
+                >
+                  {`${it.author.members[0].handle}`}
+                </Link>
               </Table.RowHeaderCell>
               <Table.Cell>
                 <div
                   style={{
                     color: authContext.ratingColor(
-                      userRating[index]?.rating || "0"
+                      it.author.members[0].rating || 0
                     ),
                   }}
                   size={"1"}
                   color="gray"
                   variant="outline"
                 >
-                  {userRating[index]?.rating || "-"}
+                  {it.author.members[0].rating === undefined ? (
+                    <Spinner />
+                  ) : it.author.members[0].rating !== -1 ? (
+                    it.author.members[0].rating
+                  ) : (
+                    "-"
+                  )}
+                  {/* {userRating[index]?.rating || "-"} */}
                 </div>
               </Table.Cell>
               <Table.Cell>

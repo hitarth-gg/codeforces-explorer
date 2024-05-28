@@ -29,10 +29,15 @@ export default function Pagination({
   setPageNo,
   page,
   setPage,
+  position,
 }) {
   const pageCount = Math.ceil(arraySize / pageSize);
   return (
-    <div className="flex absolute right-4 w-fitjustify-center items-center border-[1px] rounded-sm border-[#43484e]">
+    <div
+      className={`flex  ${
+        position ? position : "absolute"
+      }  w-fit justify-center items-center border-[1px] rounded-sm border-[#43484e]`}
+    >
       <IconButton
         size={"1"}
         color="gray"
@@ -59,10 +64,10 @@ export default function Pagination({
           </Button>
         </DropdownMenu.Trigger>
         <DropdownMenu.Content>
-          <Grid columns={"5"} >
+          <Grid columns={"5"}>
             {Array.from({ length: pageCount }).map((_, i) => (
               <DropdownMenu.Item
-              key={i}
+                key={i}
                 style={
                   i === pageNo
                     ? { ...styles.selected, ...styles.fixed }

@@ -16,27 +16,29 @@ export default function SearchBar() {
   const inputRef = useRef(null);
 
   function extractIdAndIndex(url) {
-    const regex = /(\d+).*\/([A-Z])$/;
+    const regex = /(\d+|[A-Za-z]\d+).*\/([A-Za-z]\d*)$/;
     const match = url.match(regex);
     if (match) {
-        return { number: match[1], index: match[2] };
+      return { number: match[1], index: match[2].toUpperCase() };
     }
     return null;
-}
+  }
 
   useEffect(() => {
     const handleKeyPress = (event) => {
       if (event.key === "Enter") {
-        if (
-          searchText.indexOf("/") !== -1
-        ) {
-          const idx = extractIdAndIndex(searchText);
-          const contestId = idx.number; 
-          const problemIndex = idx.index;
-          authContext.getSolutions(contestId, problemIndex);
-        } else {
-          authContext.getSubmissions({ username: searchText });
-          inputRef.current.blur();
+        try {
+          if (searchText.indexOf("/") !== -1) {
+            const idx = extractIdAndIndex(searchText);
+            const contestId = idx.number;
+            const problemIndex = idx.index;
+            authContext.getSolutions(contestId, problemIndex);
+          } else {
+            authContext.getSubmissions({ username: searchText });
+            inputRef.current.blur();
+          }
+        } catch (e) {
+          authContext.setErrorMessage("Contest/Problem not found");
         }
       }
       if (event.ctrlKey && event.key === "k") {
@@ -55,7 +57,7 @@ export default function SearchBar() {
 
   const handleSearchChange = (event) => {
     setSearchText(event.target.value);
-    console.log(searchText);
+    // console.log(searchText);
   };
 
   return (

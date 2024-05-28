@@ -62,6 +62,18 @@ export default function TableQue() {
 
   return (
     <div className="">
+      <div className="flex justify-end">
+        <Pagination
+          arraySize={tempq.length}
+          pageSize={pageSize}
+          setPageSize={setPageSize}
+          pageNo={pageNo}
+          setPageNo={setPageNo}
+          page={page}
+          setPage={setPage}
+          position="relative"
+        />
+      </div>
       <Table.Root size="1">
         <Table.Header>
           <Table.Row style={{ color: "#cccccc" }}>
@@ -100,17 +112,6 @@ export default function TableQue() {
             </Table.Cell>
             <Table.ColumnHeaderCell>Division</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Tags</Table.ColumnHeaderCell>
-            <Table.Cell>
-              <Pagination
-                arraySize={tempq.length}
-                pageSize={pageSize}
-                setPageSize={setPageSize}
-                pageNo={pageNo}
-                setPageNo={setPageNo}
-                page={page}
-                setPage={setPage}
-              />
-            </Table.Cell>
           </Table.Row>
         </Table.Header>
 
@@ -164,7 +165,6 @@ export default function TableQue() {
                   // <Badge className="mx-1" style={{fontFamily: "", fontWeight: ""}} size={"1"} color="gray" variant="outline">{tag}</Badge>
                 ))}
               </Table.Cell>
-              <Table.Cell></Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
