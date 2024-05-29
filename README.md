@@ -43,3 +43,9 @@ Problems can be searched in two ways :
 `https://codeforces.com/contest/1977/problem/B`
 ##### Fetching more Solutions
 For fetching more correct sumbissions of a problem change the value of `Submissions to Fetch` in `Settings > Values` from `8000` to a **higher value**. However this will increase the time taken to fetch the data.
+
+# Extension Support: 
+https://github.com/hitarth-gg/codeforces-explorer-extension
+    ![image](https://github.com/hitarth-gg/codeforces-explorer-extension/assets/132205558/152064d6-0c6f-4a27-b9d6-6964ef89d991)
+    ![image](https://github.com/hitarth-gg/codeforces-explorer-extension/assets/132205558/4aa7bdf3-5253-46ad-bd17-01cbd63750f1)
+
