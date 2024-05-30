@@ -6,7 +6,6 @@ export const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export default function AuthProvider({ children }) {
-
   const [questionsSolved, setQuestionsSolved] = useState([]);
   const [correctSubmissions, setCorrectSubmissions] = useState([]);
   const [skippedSubmissions, setSkippedSubmissions] = useState([]);
@@ -41,10 +40,13 @@ export default function AuthProvider({ children }) {
 
       if (response.status === 400) {
         throw new Error("User not found");
-      }
-      if (response.status !== 200) {
+      } else if (response.status === 403) {
+        throw new Error("Too many requests");
+      } else if (response.status !== 200) {
         throw new Error("Failed to fetch data");
       }
+
+      console.log(response.status);
 
       const data = await response.json();
       setUsername(username);
@@ -77,9 +79,16 @@ export default function AuthProvider({ children }) {
       setCorrectSubmissions(newCorrectSubmissions);
       setSkippedSubmissions(newSkippedSubmissions);
     } catch (error) {
-      if (error.message === "User not found")
-        setErrorMessage("User not found !");
-      else setErrorMessage("Failed to fetch data");
+      console.log(error);
+
+      if (error instanceof TypeError && error.message === "Failed to fetch") {
+        setErrorMessage(
+          "Network error or CF API is down. Please try again later."
+        );
+      } else {
+        setErrorMessage(error.message);
+      }
+
       setCorrectSubmissions([]);
       setQuestionsSolved([]);
       setSkippedSubmissions([]);
@@ -104,6 +113,8 @@ export default function AuthProvider({ children }) {
 
       if (response.status === 400) {
         throw new Error("Contest not found");
+      } else if (response.status === 403) {
+        throw new Error("Too many requests");
       }
       if (response.status !== 200) {
         throw new Error("Failed to fetch data");
@@ -123,9 +134,16 @@ export default function AuthProvider({ children }) {
       // console.log(newSolution);
       setSolutions(newSolution);
     } catch (error) {
-      if (error.message === "Contest not found")
-        setErrorMessage("Contest not found !");
-      else setErrorMessage("Failed to fetch data");
+      // if (error.message === "Contest not found")
+      // setErrorMessage("Contest not found !");
+      // else setErrorMessage("Failed to fetch data");
+      if (error instanceof TypeError && error.message === "Failed to fetch") {
+        setErrorMessage(
+          "Network error or CF API is down. Please try again later."
+        );
+      } else {
+        setErrorMessage(error.message);
+      }
       setSolutions("");
     } finally {
       setLoading(false);
@@ -196,7 +214,7 @@ export default function AuthProvider({ children }) {
         setSubmissionCount,
         usernameChunkSize,
         setUsernameChunkSize,
-        getSolMemory
+        getSolMemory,
       }}
     >
       {children}
