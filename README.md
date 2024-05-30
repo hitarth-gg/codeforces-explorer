@@ -25,6 +25,8 @@ Pagination:
 - See Correct submissions from the past 8,000 / 20,000 / 50,000 submissions.
 - Sort correct submissions based on user ratings
 - Filter correct submissions based on programming languages
+![image](https://github.com/hitarth-gg/codeforces-explorer/assets/132205558/43d253db-6841-4ac2-ba83-4d45cd507a5c)
+
 
 ## Quick Guide
 
