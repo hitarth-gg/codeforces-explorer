@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Code,
   DropdownMenu,
@@ -92,6 +91,20 @@ export default function Solutions() {
     setSortedData(sortedTempq);
   }
 
+  function sortByExecTimeAsc() {
+    const sortedTempq = [...sortedData].sort(
+      (a, b) => a.timeConsumedMillis - b.timeConsumedMillis
+    );
+    setSortedData(sortedTempq);
+  }
+
+  function sortByExecTimeDesc() {
+    const sortedTempq = [...sortedData].sort(
+      (a, b) => b.timeConsumedMillis - a.timeConsumedMillis
+    );
+    setSortedData(sortedTempq);
+  }
+
   const [pageSize, setPageSize] = useState(100);
   const [pageNo, setPageNo] = useState(0);
   const [page, setPage] = useState([]);
@@ -146,7 +159,7 @@ export default function Solutions() {
             50K
           </Button>
           {/* <DividerVerticalIcon color="gray" height={20} width={20} /> */}
-            <ArrowRightIcon color="gray" height={16} width={16} />
+          <ArrowRightIcon color="gray" height={16} width={16} />
           {/* <Text size={"1"}>Search Again: </Text> */}
           <Button
             size={"1"}
@@ -159,7 +172,9 @@ export default function Solutions() {
             <MagnifyingGlassIcon />
           </Button>
           <DividerVerticalIcon color="gray" height={20} width={20} />
-            <Code color="gray" variant="outline" size="1">Correct Submissions: {sortedData.length}</Code>
+          <Code color="gray" variant="outline" size="1">
+            Correct Submissions: {sortedData.length}
+          </Code>
         </Flex>
 
         <Pagination
@@ -247,7 +262,38 @@ export default function Solutions() {
                 </DropdownMenu.Content>
               </DropdownMenu.Root>
             </Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Time</Table.ColumnHeaderCell>
+            {/* <Table.ColumnHeaderCell>Time</Table.ColumnHeaderCell> */}
+
+            <Table.ColumnHeaderCell>
+              <DropdownMenu.Root>
+                <DropdownMenu.Trigger>
+                  <Button size={"1"} variant="soft" color="gray">
+                    Time
+                    <DropdownMenu.TriggerIcon />
+                  </Button>
+                </DropdownMenu.Trigger>
+                <DropdownMenu.Content size={"1"}>
+                  <DropdownMenu.Item
+                    shortcut={<BarChartIcon />}
+                    onClick={sortDefault}
+                  >
+                    Default
+                  </DropdownMenu.Item>
+                  <DropdownMenu.Item
+                    shortcut={<ArrowDownIcon />}
+                    onClick={sortByExecTimeAsc}
+                  >
+                    Ascending
+                  </DropdownMenu.Item>
+                  <DropdownMenu.Item
+                    shortcut={<ArrowUpIcon />}
+                    onClick={sortByExecTimeDesc}
+                  >
+                    Descending
+                  </DropdownMenu.Item>
+                </DropdownMenu.Content>
+              </DropdownMenu.Root>
+            </Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Memory</Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
