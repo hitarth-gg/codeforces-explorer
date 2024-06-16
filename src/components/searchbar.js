@@ -13,7 +13,7 @@ export default function SearchBar() {
   let [searchParams] = useSearchParams();
   let path = searchParams.get("");
 
-  console.log(path);
+  // console.log(path);
 
   const urlParams = [];
   if (path) {
@@ -25,7 +25,7 @@ export default function SearchBar() {
     }
   }
 
-  console.log(urlParams);
+  // console.log(urlParams);
 
   let navigate = useNavigate();
 
@@ -66,6 +66,7 @@ export default function SearchBar() {
       authContext.getSolutions(contestId, problemIndex);
     } else {
       authContext.getSubmissions({ username: searchText });
+      authContext.getUserRatingGraph({ username: searchText });
       inputRef.current.blur();
     }
   }

@@ -147,10 +147,11 @@ export default function TableQue() {
                 >{`${it.contestId} - ${it.index}`}</Link>
               </Table.Cell>
               <Table.Cell>
-                {it.tags.map((tag) => (
+                {it.tags.map((tag, ix) => (
                   <Code
-                    key={tag}
-                    color="gray"
+                  // key={tag + it.id}
+                  key={tag + it.id + ix}
+                  color="gray"
                     variant="ghost"
                     className="mx-1 border-[0.3px] border-[#363a3f]"
                     style={{

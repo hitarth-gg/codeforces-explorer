@@ -6,6 +6,7 @@ export const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export default function AuthProvider({ children }) {
+  const [userRatingGraph, setUserRatingGraph] = useState({});
   const [questionsSolved, setQuestionsSolved] = useState([]);
   const [correctSubmissions, setCorrectSubmissions] = useState([]);
   const [skippedSubmissions, setSkippedSubmissions] = useState([]);
@@ -191,11 +192,47 @@ export default function AuthProvider({ children }) {
     if (rating >= 3000) return "#b22323";
     return "#e97ee9";
   }
+  console.log(userRatingGraph);
+  
+  async function getUserRatingGraph({ username }) {
+    // setLoading(true);
+    if (errorMessage === "") {
+      try {
+        const response = await fetch(
+          `https://codeforces.com/api/user.rating?handle=${username}`
+        );
+        if (response.status === 400) {
+          throw new Error("User not found");
+        } else if (response.status === 403) {
+          throw new Error("Too many requests");
+        } else if (response.status !== 200) {
+          throw new Error("Failed to fetch data");
+        }
+
+        const data = await response.json();
+        setUserRatingGraph(data.result);
+        // console.log(data.result);
+      } catch (error) {
+        console.log(error);
+        if (error instanceof TypeError && error.message === "Failed to fetch") {
+          setErrorMessage(
+            "Network error or CF API is down. Please try again later."
+          );
+        } else {
+          setErrorMessage(error.message);
+        }
+      } finally {
+        setLoading(false);
+      }
+    }
+  }
 
   return (
     <AuthContext.Provider
       value={{
         getSubmissions,
+        getUserRatingGraph,
+        userRatingGraph,
         questionsSolved,
         correctSubmissions,
         skippedSubmissions,

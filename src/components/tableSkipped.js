@@ -142,9 +142,12 @@ export default function TableSkipped() {
                 >{`${it.contestId} - ${it.index}`}</Link>
               </Table.Cell>
               <Table.Cell>
-                {it.tags.map((tag) => (
+                {it.tags.map((tag, ix) => (
                   <Code
-                    key={tag}
+                    // key={"skipped" + tag + it.id}
+                  key={tag + it.id + ix}
+
+                    // key={tag + it.id}
                     color="gray"
                     variant="ghost"
                     className="mx-1 border-[0.3px] border-[#363a3f]"
