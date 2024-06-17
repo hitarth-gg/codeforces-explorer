@@ -66,7 +66,7 @@ export default function SearchBar() {
       authContext.getSolutions(contestId, problemIndex);
     } else {
       authContext.getSubmissions({ username: searchText });
-      authContext.getUserRatingGraph({ username: searchText });
+      // authContext.getUserRatingGraph({ username: searchText });
       inputRef.current.blur();
     }
   }

@@ -47,7 +47,7 @@ export default function AuthProvider({ children }) {
         throw new Error("Failed to fetch data");
       }
 
-      console.log(response.status);
+      console.log("Response Status: " + response.status);
 
       const data = await response.json();
       setUsername(username);
@@ -192,7 +192,7 @@ export default function AuthProvider({ children }) {
     if (rating >= 3000) return "#b22323";
     return "#e97ee9";
   }
-  console.log(userRatingGraph);
+  // console.log(userRatingGraph);
   
   async function getUserRatingGraph({ username }) {
     // setLoading(true);

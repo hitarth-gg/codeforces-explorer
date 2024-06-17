@@ -110,7 +110,7 @@ const Example = () => {
   const fillOp = 1;
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height="100%" className="overflow-hidden">
       <LineChart
         width={500}
         height={300}
