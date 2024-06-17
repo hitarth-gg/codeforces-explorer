@@ -4,7 +4,7 @@ import React from "react";
 
 export default function GithubCard() {
   return (
-    <div className=" transition-all ease-in-out duration-100">
+    <div className=" w-fit transition-all ease-in-out duration-100">
       <Card asChild size={"1"} style={{ padding: ".6rem" }}>
         <a
           target="_blank"
