@@ -1,49 +1,19 @@
-const { blackA, mauve, violet } = require("@radix-ui/colors");
+/* eslint-disable import/no-anonymous-default-export */
+
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     fontFamily: {
-      sans: ['"inter", ui-sans-serif', "system-ui"],
-      geo: ["geologica", "Georgia"],
-      mono: ["ui-monospace", "SFMono-Regular"],
-      pixelify: ["pixelify-sans", "geologica", "Georgia"],
+      'sans': ['ui-sans-serif', 'system-ui'],
+      'inter': ['inter','ui-sans-serif', 'system-ui'],
+      'spaceMono': ['space-mono','ui-sans-serif', 'system-ui'],
     },
-    extend: {
-      colors: {
-        ...blackA,
-        ...mauve,
-        ...violet,
-      },
-      keyframes: {
-        slideUpAndFade: {
-          from: { opacity: "0", transform: "translateY(2px)" },
-          to: { opacity: "1", transform: "translateY(0)" },
-        },
-        slideRightAndFade: {
-          from: { opacity: "0", transform: "translateX(-2px)" },
-          to: { opacity: "1", transform: "translateX(0)" },
-        },
-        slideDownAndFade: {
-          from: { opacity: "0", transform: "translateY(-2px)" },
-          to: { opacity: "1", transform: "translateY(0)" },
-        },
-        slideLeftAndFade: {
-          from: { opacity: "0", transform: "translateX(2px)" },
-          to: { opacity: "1", transform: "translateX(0)" },
-        },
-      },
-      animation: {
-        slideUpAndFade: "slideUpAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)",
-        slideRightAndFade:
-          "slideRightAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)",
-        slideDownAndFade:
-          "slideDownAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)",
-        slideLeftAndFade:
-          "slideLeftAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)",
-      },
-      
-    },
+    extend: {},
   },
   plugins: [],
-};
+}
+
