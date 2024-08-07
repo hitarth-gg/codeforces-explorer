@@ -5,29 +5,34 @@ import User from "./pages/User";
 import ErrorPage from "./pages/ErrorPage";
 import Solutions from "./pages/Solutions";
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      element: <AppLayout />,
+      errorElement: <AppLayout props={<ErrorPage />} />,
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+          errorElement: <ErrorPage />,
+        },
+        {
+          path: "/user/:id",
+          element: <User />,
+          errorElement: <ErrorPage />,
+        },
+        {
+          path: "/problem/:contest/:index",
+          element: <Solutions />,
+          errorElement: <ErrorPage />,
+        },
+      ],
+    },
+  ],
   {
-    element: <AppLayout />,
-    errorElement: <AppLayout props={<ErrorPage />} />,
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-        errorElement: <ErrorPage />,
-      },
-      {
-        path: "/user/:id",
-        element: <User />,
-        errorElement: <ErrorPage />,
-      },
-      {
-        path: "/problem/:contest/:index",
-        element: <Solutions />,
-        errorElement: <ErrorPage />,
-      },
-    ],
+    basename: "/codeforces-explorer",
   },
-]);
+);
 
 function App() {
   return <RouterProvider router={router} />;
