@@ -29,7 +29,6 @@ export default function SearchBar() {
     setSearchText(event.target.value);
     console.log(event.target.value);
   };
-
   const handleSearchText = useCallback(
     function handleSearchText(text) {
       if (text === "") {

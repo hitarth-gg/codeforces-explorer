@@ -145,6 +145,11 @@ export function getRatingGraph(username) {
       } else if (res.status !== 200) {
         throw new Error("Failed to fetch data");
       }
+      // console.log(res.headers.get("Content-Type"));
+      
+      if (res.headers.get("Content-Type").includes("text/html")) {
+        throw new Error("Network error or CodeForces API is down. Please try again later");
+      }
 
       const data = await res.json();
 
