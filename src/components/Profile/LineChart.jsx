@@ -148,7 +148,9 @@ const Example = () => {
     graphData.length > 10 ? Math.floor(graphData.length / 10) : 0;
   // const interval = 10;
 
-  const currentRating = data[data.length - 1].newRating;
+  // const currentRating = data[data.length - 1].newRating;
+  const currentRating = Math.max(...data.map(el => el.newRating));
+
   const originalRatingsYAxis = [
     1200, 1400, 1600, 1900, 2100, 2300, 2400, 2600, 3000,
   ];
