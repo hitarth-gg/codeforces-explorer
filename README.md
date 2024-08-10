@@ -8,6 +8,7 @@
 Sort data by the rating of the questions
 - Clicking on a problem redirects you to the submission made by the user
 - Clicking on the division redirects you to the problem on Codeforces
+- Rating v/s Total number of problems solved chart
 
 Questions Solved:
 ![image](https://github.com/hitarth-gg/codeforces-explorer/assets/132205558/d1fcba3e-3c47-46f8-96c0-d7881ae6993d)
@@ -15,6 +16,9 @@ Sorting:
 ![image](https://github.com/hitarth-gg/codeforces-explorer/assets/132205558/2d0c9e51-93d9-4544-b028-4ad03fcd9d66)
 Pagination:
 ![image](https://github.com/hitarth-gg/codeforces-explorer/assets/132205558/17e389d6-4984-424a-940f-747a9c0e7773)
+Rating v/s Total Number of Problems Solved:
+![image](https://github.com/user-attachments/assets/0d4c6bec-bb9d-45c0-bfbb-cda48de76bf8)
+
 
 ### For a codeforces problem you can:
 
@@ -47,5 +51,3 @@ https://github.com/hitarth-gg/codeforces-explorer-extension
     ![image](https://github.com/hitarth-gg/codeforces-explorer-extension/assets/132205558/152064d6-0c6f-4a27-b9d6-6964ef89d991)
     ![image](https://github.com/hitarth-gg/codeforces-explorer-extension/assets/132205558/4aa7bdf3-5253-46ad-bd17-01cbd63750f1)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
