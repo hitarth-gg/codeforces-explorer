@@ -97,22 +97,24 @@ const Example = () => {
   const [graphData, setGraphData] = useState([]);
 
   const data = useSelector((store) => store.user.ratingGraph);
-  const correctSubmissions = useSelector(
-    (store) => store.user.correctSubmissions,
-  );
+  const problemsSolved = useSelector((store) => store.user.problemsSolved);
 
-  if(data.length === 0) throw new Error("No contest data to show here.\n User probably has not participated in any contests yet.");
+  if (data.length === 0)
+    throw new Error(
+      "No contest data to show here.\n User probably has not participated in any contests yet.",
+    );
 
   // reverse array
-  const reversedSubmissions = [...correctSubmissions].reverse();
+  const reversedSubmissions = [...problemsSolved].reverse();
   const updatedData = data.map((entry) => ({ ...entry })); // Create a shallow copy of each object in data
+  // console.log(reversedSubmissions);
 
+  // const counts = { total: 0, names: []};
   const counts = { total: 0 };
   let it = 0;
-
   for (let i = 0; i < reversedSubmissions.length; i++) {
     if (
-      reversedSubmissions[i].creationTimeSeconds <=
+      reversedSubmissions[i].creationTimeSeconds <
       updatedData[it].ratingUpdateTimeSeconds
     ) {
       counts[reversedSubmissions[i].rating] = counts[
@@ -121,12 +123,19 @@ const Example = () => {
         ? counts[reversedSubmissions[i].rating] + 1
         : 1;
       counts.total += 1;
+
+      // store all the names of the problems
+      // counts.names = [...counts.names, reversedSubmissions[i].problem];
     } else {
       updatedData[it].counts = { ...counts };
       it++;
       if (it >= updatedData.length) break;
     }
   }
+
+  updatedData[it].counts = { ...counts };
+
+  console.log(counts);
 
   useEffect(() => {
     const formattedData = updatedData.map((entry) => ({
@@ -140,7 +149,7 @@ const Example = () => {
     }));
 
     setGraphData(formattedData);
-  }, [data, correctSubmissions]);
+  }, [data, problemsSolved]);
 
   const [bottomStatDisplay, setBottomStatDisplay] = useState({});
   const fillOp = 1;
@@ -149,7 +158,7 @@ const Example = () => {
   // const interval = 10;
 
   let currentRating = data[data.length - 1].newRating;
-  currentRating = Number(Math.max(...data.map(el => el.newRating)));
+  currentRating = Number(Math.max(...data.map((el) => el.newRating)));
 
   const originalRatingsYAxis = [
     1200, 1400, 1600, 1900, 2100, 2300, 2400, 2600, 3000,
@@ -161,7 +170,9 @@ const Example = () => {
 
   return (
     <div className="h-96 w-[100%]">
-      <div className="font-spaceMono font-medium pb-2 border-b border-[#2e3135]"># Rating v/s Problems Solved Chart</div>
+      <div className="border-b border-[#2e3135] pb-2 font-spaceMono font-medium">
+        # Rating v/s Problems Solved Chart
+      </div>
       <ResponsiveContainer
         width="100%"
         height="100%"
@@ -304,7 +315,12 @@ const Example = () => {
             tick={{ fontSize: 12 }}
             interval={interval}
           />
-          <YAxis ticks={defaultRatingsYAxis} tickCount={1} interval={0} fontSize={13} />
+          <YAxis
+            ticks={defaultRatingsYAxis}
+            tickCount={1}
+            interval={0}
+            fontSize={13}
+          />
           <Tooltip
             layout={"vertical"}
             verticalAlign={"top"}
@@ -368,9 +384,7 @@ const Example = () => {
               <div className="font-spaceMono text-sm">
                 Click on the dots to view detailed stats
               </div>
-            )
-            
-            }
+            )}
             <div className="grid grid-flow-col grid-cols-3 grid-rows-5 gap-x-6 text-nowrap">
               {bottomStatDisplay.counts &&
                 Object.keys(bottomStatDisplay.counts).map((key) => {
@@ -379,7 +393,7 @@ const Example = () => {
                       <div className="flex gap-x-1 text-sm">
                         {/* <p className={`text-[${ratingColor(key)}]`}>{`${key} :`}</p> */}
                         <p
-                        className="font-medium"
+                          className="font-medium"
                           style={{
                             color: ratingColor(key),
                           }}
