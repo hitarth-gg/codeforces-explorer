@@ -112,9 +112,9 @@ const Example = () => {
   // const counts = { total: 0, names: []};
   const counts = { total: 0 };
   let it = 0;
-  for (let i = 0; i < reversedSubmissions.length; i++) {
+  for (let i = 0; i <= reversedSubmissions.length; i++) {
     if (
-      reversedSubmissions[i].creationTimeSeconds <
+      reversedSubmissions[i]?.creationTimeSeconds <
       updatedData[it].ratingUpdateTimeSeconds
     ) {
       counts[reversedSubmissions[i].rating] = counts[
@@ -133,9 +133,9 @@ const Example = () => {
     }
   }
 
-  updatedData[it].counts = { ...counts };
+  // updatedData[it].counts = { ...counts };
 
-  console.log(counts);
+  // console.log(counts);
 
   useEffect(() => {
     const formattedData = updatedData.map((entry) => ({
@@ -182,7 +182,7 @@ const Example = () => {
           width={500}
           height={300}
           onMouseDown={(e) => {
-            console.log(e);
+            // console.log(e);
 
             setBottomStatDisplay(e.activePayload[0].payload);
           }}

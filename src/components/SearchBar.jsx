@@ -25,9 +25,11 @@ export default function SearchBar() {
     else setSearchText("");
   }, [x.contest, x.id, x.index]);
 
+  console.log(searchText);
+  
   const handleSearchChange = (event) => {
     setSearchText(event.target.value);
-    console.log(event.target.value);
+    // console.log(event.target.value);
   };
   const handleSearchText = useCallback(
     function handleSearchText(text) {
@@ -39,10 +41,11 @@ export default function SearchBar() {
         return;
       }
       if (text.indexOf("/") === -1) {
-        const currentURL = window.location.href;
+        const currentURL = window.location.href.split("/");
         // console.log(currentURL);
         // navigate(`/user/${text}`);
-        if (currentURL.includes(`/user/${text}`)) navigate(0);
+        // if (currentURL.includes(`/user/${text}`)) navigate(0);
+        if (currentURL.includes(text) && currentURL.includes("user")) navigate(0);
         else navigate(`/user/${text}`);
       } else {
         const problem = extractIdAndIndex(text);
